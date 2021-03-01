@@ -65,11 +65,13 @@ Update a user by userID
 
 ### /users/:userID/exchanges/:exchangeName/symbols/:symbolName/volume
 
-**GET** First retrieves an API key for a given userID and exchangeName. Then makes a request to the exchangeName to retrieve the total volume over a given timefrom from a certain timestamp. This request accepts two required parameters: 
+**GET** First retrieves an API key for a given userID and exchangeName. Then makes a request to the exchangeName to retrieve the total volume over a given timeframe from a certain timestamp. This request accepts two required parameters:
+
 * *timeframe* accepted enumerations 1, 3, 5, 15, 30, 60, 120, 240, 360, 720, D, M, W
 * *from* string representing the unix time in seconds of when the volume should be measured
 **Example**
-```
+
+```javascript
 GET http://localhost:4000/users/1/exchanges/bybit/symbols/ETHUSD/volume?timeframe=60&from=1614499318
 {
   error: false,
@@ -108,3 +110,7 @@ GET http://localhost:4000/users/1/exchanges/bybit/symbols/ETHUSD/volume?timefram
 ### /exchanges/:exchangeName/symbols/:symbolName
 
 **GET** Retrieves true/false if an exchange has a given symbolName in the postgres DB
+
+### /exchanges/:exchangeName/symbols/:symbolName/volume
+
+**GET** Same as above for user except uses environment variables for API Key
