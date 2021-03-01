@@ -70,7 +70,7 @@ Update a user by userID
 * *timeframe* accepted enumerations 1, 3, 5, 15, 30, 60, 120, 240, 360, 720, D, M, W
 * *from* string representing the unix time in seconds of when the volume should be measured
 
-**Example**
+#### Example
 
 ```javascript
 GET http://localhost:4000/users/1/exchanges/bybit/symbols/ETHUSD/volume?timeframe=60&from=1614499318
