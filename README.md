@@ -65,7 +65,33 @@ Update a user by userID
 
 ### /users/:userID/exchanges/:exchangeName/symbols/:symbolName/volume
 
-**GET** Makes an API request to exchangeName for symbolName and retrieves the volume. This request accepts two required parameters: timeframe and from
+**GET** First retrieves an API key for a given userID and exchangeName. Then makes a request to the exchangeName to retrieve the total volume over a given timefrom from a certain timestamp. This request accepts two required parameters: 
+* *timeframe* accepted enumerations 1, 3, 5, 15, 30, 60, 120, 240, 360, 720, D, M, W
+* *from* string representing the unix time in seconds of when the volume should be measured
+**Example**
+```
+GET http://localhost:4000/users/1/exchanges/bybit/symbols/ETHUSD/volume?timeframe=60&from=1614499318
+{
+  error: false,
+    "message": "Volume received from BYBIT for parameters (Symbol: ETHUSD, Interval: 60, From: 1614499318)",
+    "data": {
+        "volume": "$69,437,960",
+        "bybit": [
+            {
+                "symbol": "ETHUSD",
+                "interval": "60",
+                "open_time": 1614502800,
+                "open": "1360.6",
+                "high": "1379.3",
+                "low": "1349.1",
+                "close": "1365.25",
+                "volume": "69437960",
+                "turnover": "50765.762802349964"
+            }
+        ]
+    }
+}
+```
 
 ### /exchanges
 
