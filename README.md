@@ -28,7 +28,9 @@ Adds a new user to the postgres DB
 ### /users/userID
 **GET**
 Retrieves user by userID from postgres DB
+
 **DELETE**
 Deletes user by userID from postgres DB
+
 **PUT**
 Update a user by userID
