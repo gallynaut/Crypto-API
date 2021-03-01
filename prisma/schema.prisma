@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ExchangeSymbol {
+  fullSymbolName     String         @db.VarChar(51)  @id // [exchangeName]-[baseCurrency][quoteCurrency]-
+  baseCurrency       String         @db.VarChar(8)
+  quoteCurrency      String         @db.VarChar(8)
+  symbolName         String         @db.VarChar(16)                //[baseCurrency][quoteCurrency]
+  exchangeName       String         @db.VarChar(25)
+  exchange           Exchange       @relation(fields: [exchangeName], references: [name])
+}
+
+model KlineData {
+  id                  Int            @default(autoincrement()) @id
+  fullSymbolName      String         @db.VarChar(51) 
+  exchangeName        String         @db.VarChar(25)
+  openPrice           String         @db.VarChar(32)
+  openTime            String         @db.VarChar(12)
+  closePrice          String         @db.VarChar(32)
+  closeTime           String         @db.VarChar(12)
+  highPrice           String         @db.VarChar(32)
+  lowPrice            String         @db.VarChar(32)
+  timeframe           String         @db.VarChar(10)
+  volume              String         @db.VarChar(32)
+  symbol              ExchangeSymbol @relation(fields: [fullSymbolName], references: [fullSymbolName])
+  exchange            Exchange       @relation(fields: [exchangeName], references: [name])
+}
+
+model Exchange {
+  name                String          @db.VarChar(25)   @id
+  endPoint            String          @db.VarChar(255)  @unique
+  symbols             ExchangeSymbol[]
+  klineData           KlineData[]
+  //purposely not including api keys
+}
+
+
+model ApiKey {
+  id                  Int             @default(autoincrement()) @id
+  apiKey              String
+  secret              String
+  userID              Int
+  exchangeName        String          @db.VarChar(25)
+  createdAt           String          @db.VarChar(12)
+  subaccount          String?         @db.VarChar(25)
+  user                User            @relation(fields: [userID], references: [id])
+  exchange            Exchange        @relation(fields: [exchangeName], references: [name])
+}
+
+model User {
+  id                  Int             @default(autoincrement()) @id
+  email               String          @db.VarChar(50)           @unique
+  firstName           String?         @db.VarChar(15)
+  lastName            String?         @db.VarChar(15)
+  apiKeys             ApiKey[]
+} 

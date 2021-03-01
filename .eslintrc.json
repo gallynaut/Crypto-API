@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "airbnb-typescript/base"
+  ],
+  "env": {
+    "node": true,
+    "jest/globals": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "jest"
+  ],
+  "rules": {
+    "import/prefer-default-export": 0,
+    "import/no-cycle": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": [
+      "off",
+      "never"
+    ],
+    "no-underscore-dangle": 0,
+    "max-classes-per-file": 0,
+    "max-len": ["error", { "code": 120 }],
+    "@typescript-eslint/lines-between-class-members": 0
+  }
+}
