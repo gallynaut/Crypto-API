@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import express from 'express';
 import exchangesService from '../services/exchanges.services';
 import APIResponse from '../models/apiResponse.interface';
@@ -13,7 +12,8 @@ class ExchangeMiddleware {
     return ExchangeMiddleware.instance;
   }
 
-  extractExchangeName = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  extractExchangeName = async (req: express.Request,
+    res: express.Response, next: express.NextFunction) => {
     if (!req.params.exchangeName) {
       res.status(400).send({
         error: true,
@@ -35,7 +35,8 @@ class ExchangeMiddleware {
     }
   };
 
-  extractSymbolName = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  extractSymbolName = async (req: express.Request,
+    res: express.Response, next: express.NextFunction) => {
     if (!req.params.symbolName) {
       res.status(400).send({
         error: true,
@@ -45,7 +46,8 @@ class ExchangeMiddleware {
       req.body.symbolName = req.params.symbolName.toUpperCase();
 
       // CHECK SYMBOL EXIST
-      const readResp:APIResponse = await exchangesService.checkSymbolByExchange(req.body.exchangeName, req.body.symbolName);
+      const readResp:APIResponse = await
+      exchangesService.checkSymbolByExchange(req.body.exchangeName, req.body.symbolName);
       if (!readResp.data) {
         res.status(400).send({
           error: true,

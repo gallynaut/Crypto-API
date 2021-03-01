@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import BybitKline from '../models/bybit.kline.model';
 
 export interface ByBitResponse {
@@ -23,6 +22,7 @@ class BybitDao {
   // const axios = require('axios').default;
 
   constructor() {
+    // eslint-disable-next-line no-console
     console.log('Created new instance of Bybit DAO');
     // Calculate server time offset here and store in global variable
   }
@@ -41,7 +41,9 @@ class BybitDao {
       const rsp = await axios.get(reqURL);
       rspData = rsp.data;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log('error', error);
+      // eslint-disable-next-line no-console
       console.log('GET: ', reqURL);
     }
     return rspData;

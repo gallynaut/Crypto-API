@@ -2,6 +2,14 @@
 
 This api runs on express and interacts with a postgres DB via Prisma.
 
+## Setup
+
+```javascript
+npm i
+npx prisma generate
+npm run dev
+```
+
 ## Model
 
 Optionally you can view the prisma schema for postgres structure
