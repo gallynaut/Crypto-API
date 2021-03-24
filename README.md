@@ -49,41 +49,30 @@ Optionally you can view the prisma schema for postgres structure
 
 ## Routes
 
-### /users
+### /exchanges
 
-**POST**
-Adds a new user to the postgres DB
+**GET** Retrieves list of exchanges from postgres DB
 
-### /users/:userID
+### /exchanges/:exchangeName
 
-**GET**
-Retrieves user by userID from postgres DB
+**GET** Retrieves exchange object from postgres DB by exchangeName
 
-**DELETE**
-Deletes user by userID from postgres DB
+### /exchanges/:exchangeName/symbols
 
-**PUT**
-Update a user by userID
+**GET** Retrieves list of ExchangeSymbol objects from postgres DB for a given exchangeName
 
-### /users/:userID/exchanges
+### /exchanges/:exchangeName/symbols/:symbolName
 
-**GET** Retrieves list of exchanges with an API Key tied to a userID
+**GET** Retrieves true/false if an exchange has a given symbolName in the postgres DB
 
-### /users/:userID/exchanges/:exchangeName
+### /exchanges/:exchangeName/symbols/:symbolName/volume
 
-**GET** Retrieves true/false if a user has an API key for a given exchangeName
-
-### /users/:userID/exchanges/:exchangeName/symbols/:symbolName/volume
-
-**GET** First retrieves an API key for a given userID and exchangeName. Then makes a request to the exchangeName to retrieve the total volume over a given timeframe from a certain timestamp. This request accepts two required parameters:
-
-* *timeframe* accepted enumerations 1, 3, 5, 15, 30, 60, 120, 240, 360, 720, D, M, W
-* *from* string representing the unix time in seconds of when the volume should be measured
+**GET** Same as above for user except uses environment variables for API Key
 
 #### Example
 
 ```javascript
-GET http://localhost:4000/users/1/exchanges/bybit/symbols/ETHUSD/volume?timeframe=60&from=1614499318
+GET http://localhost:4000/exchanges/bybit/symbols/ETHUSD/volume?timeframe=60&from=1614499318
 {
   error: false,
     "message": "Volume received from BYBIT for parameters (Symbol: ETHUSD, Interval: 60, From: 1614499318)",
@@ -105,23 +94,3 @@ GET http://localhost:4000/users/1/exchanges/bybit/symbols/ETHUSD/volume?timefram
     }
 }
 ```
-
-### /exchanges
-
-**GET** Retrieves list of exchanges from postgres DB
-
-### /exchanges/:exchangeName
-
-**GET** Retrieves exchange object from postgres DB by exchangeName
-
-### /exchanges/:exchangeName/symbols
-
-**GET** Retrieves list of ExchangeSymbol objects from postgres DB for a given exchangeName
-
-### /exchanges/:exchangeName/symbols/:symbolName
-
-**GET** Retrieves true/false if an exchange has a given symbolName in the postgres DB
-
-### /exchanges/:exchangeName/symbols/:symbolName/volume
-
-**GET** Same as above for user except uses environment variables for API Key
