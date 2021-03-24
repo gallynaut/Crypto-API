@@ -5,7 +5,6 @@ import http from 'http';
 import bodyparser from 'body-parser';
 import { CommonRoutesConfig } from './routes/common.routes.config';
 import TestRoutes from './routes/test.routes';
-import UsersRoutes from './routes/users.routes';
 import ExchangesRoutes from './routes/exchanges.routes';
 import VolumeRoutes from './routes/volume.routes';
 
@@ -17,12 +16,11 @@ const AllRoutes: Array<CommonRoutesConfig> = [];
 app.use(bodyparser.json());
 
 AllRoutes.push(new TestRoutes(app));
-AllRoutes.push(new UsersRoutes(app));
 AllRoutes.push(new ExchangesRoutes(app));
 AllRoutes.push(new VolumeRoutes(app));
 
 server.listen(port, () => {
-  console.log(`Stacked Balance Routine is running on *:${port}`);
+  console.log(`Crypto API is running on *:${port}`);
   AllRoutes.forEach((route: CommonRoutesConfig) => {
     console.log(`Routes configured for ${route.getName()}`);
   });

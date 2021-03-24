@@ -5,8 +5,8 @@
   "main": "./index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start:dev": "DOTENV_CONFIG_PATH=.env.personal ts-node-dev src/index.ts",
-    "dev": "nodemon src/index.ts && DOTENV_CONFIG_PATH=.env.personal ts-node-dev src/index.ts",
+    "start:dev": "DOTENV_CONFIG_PATH=.env ts-node-dev src/index.ts",
+    "dev": "nodemon src/index.ts && DOTENV_CONFIG_PATH=.env ts-node-dev src/index.ts",
     "lint": "eslint --fix './src/**/*.ts'",
     "test": "DOTENV_CONFIG_PATH=.env.personal jest --detectOpenHandles --runInBand --forceExit --collect-coverage",
     "update-schema": "npx prisma migrate dev --preview-feature"

@@ -1,6 +1,9 @@
 #firebase service account
 service-account.json
 
+#prisma migrations
+prisma/migrations/
+
 # Logs
 logs
 *.log

@@ -1,6 +1,5 @@
 import express from 'express';
 import { CommonRoutesConfig } from './common.routes.config';
-import UsersMiddleware from '../middleware/users.middleware';
 import ExchangeMiddleware from '../middleware/exchanges.middleware';
 import VolumeMiddleware from '../middleware/volume.middleware';
 import ExchangesController from '../controllers/exchanges.controller';
@@ -18,18 +17,6 @@ export default class VolumeRoutes extends CommonRoutesConfig {
         ExchangeMiddleware.getExchangeEndPoint,
         VolumeMiddleware.parseVolumeParameters,
         ExchangeMiddleware.loadDefaultAPIKeys,
-        VolumeMiddleware.validateTimeframe,
-      ])
-      .get(ExchangesController.getVolume);
-
-    this.app.route('/users/:userId/exchanges/:exchangeName/symbols/:symbolName/volume')
-      .all([
-        UsersMiddleware.extractUserId,
-        ExchangeMiddleware.extractExchangeName,
-        ExchangeMiddleware.extractSymbolName,
-        ExchangeMiddleware.getExchangeEndPoint,
-        VolumeMiddleware.parseVolumeParameters,
-        UsersMiddleware.getAPIKeyByExchange,
         VolumeMiddleware.validateTimeframe,
       ])
       .get(ExchangesController.getVolume);

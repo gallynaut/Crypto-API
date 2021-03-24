@@ -3,10 +3,12 @@
 This api runs on express and interacts with a postgres DB via Prisma.
 
 ## Setup
+Edit .env with api keys and database url
 
 ```javascript
 npm i
 npx prisma generate
+npx prisma migrate dev --name init --preview-feature
 npm run dev
 ```
 
